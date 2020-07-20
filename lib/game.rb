@@ -72,7 +72,52 @@ class Game
       elsif draw?
         puts "Cat's Game!"
         
-        
+        def start
+        puts "Hello! Welcome to Tic Tac Toe!"
+        puts "AI Mode: Enter '0' into the terminal."
+        puts "1-Player Mode: Enter '1' into the terminal."
+        puts "2-Player Mode: Enter '2' into the terminal."
+        mode = gets.chomp
+
+        case mode.to_s
+            when '0'
+                game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
+                game.play
+                puts "Enter 'Y' to play again, or 'Exit' to exit."
+                input = gets.chomp
+                    if input == 'Y' || input == 'y'
+                        start
+                    end
+            when '1'
+                puts "'X' plays first. 'O' plays second. Enter 1 to play first, or 2 to play second:"
+                input_order = gets.chomp
+                if input_order.to_s == '1'
+                    player_1 = Players::Human.new('X')
+                    player_2 = Players::Computer.new('O')
+                else
+                    player_1 = Players::Computer.new('X')
+                    player_2 = Players::Human.new('O')
+                end
+                game = Game.new(player_1, player_2, Board.new)
+                game.play
+                puts "Enter 'Y' to play again, or 'Exit' to exit."
+                input = gets.chomp
+                    if input == 'Y' || input == 'y'
+                        start
+                    end
+            when '2'
+                game = Game.new(Players::Human.new('X'), Players::Human.new('O'), Board.new)
+                game.play
+                puts "Enter 'Y' to play again, or 'Exit' to exit."
+                input = gets.chomp
+                    if input == 'Y' || input == 'y'
+                        start
+                    end
+            when 'wargames'
+                100.times { 
+                    game = Game.new(Players::Computer.new('X'), Players::Computer.new('O'), Board.new)
+                    game.play 
+                    }
     end
   end
 end 
